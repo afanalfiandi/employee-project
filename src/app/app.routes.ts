@@ -4,6 +4,7 @@ import { AuthComponent } from './pages/auth/auth.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { EmployeeComponent } from './pages/employee/employee.component';
+import { FormComponent } from './pages/employee/form/form.component';
 
 export const routes: Routes = [
     {
@@ -13,15 +14,17 @@ export const routes: Routes = [
     {
         path: "",
         component: MainComponent,
-        canActivate: [AuthGuard],
         children: [
             {
                 path: "dashboard",
                 component: DashboardComponent,
             },
             {
-                path: "employee",
-                component: EmployeeComponent,
+                path: 'employee',
+                loadChildren: () =>
+                    import(
+                        'app/pages/employee/employee.routes'
+                    ),
             },
         ],
     },
