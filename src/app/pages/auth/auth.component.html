@@ -1,0 +1,29 @@
+<div class="w-screen h-screen flex justify-center items-center">
+  @if (form) {
+  <app-card>
+    <form [formGroup]="form" (submit)="onAuth()">
+      <app-input
+        formControlName="username"
+        [label]="'Username'"
+        [placeholder]="'Insert username'"
+        [type]="'text'"
+        [form]="form"
+      />
+      <app-input
+        formControlName="password"
+        [label]="'Password'"
+        [placeholder]="'Insert password'"
+        [type]="'password'"
+        [form]="form"
+      />
+      <app-button
+        [label]="'Login'"
+        [mode]="'fill'"
+        [variant]="'primary'"
+        [type]="'submit'"
+        [isDisabled]="form.invalid"
+      />
+    </form>
+  </app-card>
+  }
+</div>
