@@ -2,12 +2,13 @@ import { Component, Input } from '@angular/core';
 import { TitleFormatterPipe } from '../../pipes/title-formatter.pipe';
 import { CommonModule } from '@angular/common';
 import { PaginationComponent } from "../pagination/pagination.component";
+import { ButtonIconComponent } from "../button-icon/button-icon.component";
 
 @Component({
   selector: 'app-table',
-  imports: [TitleFormatterPipe, CommonModule, PaginationComponent],
+  imports: [TitleFormatterPipe, CommonModule, PaginationComponent, ButtonIconComponent],
   templateUrl: './table.component.html',
-  styleUrl: './table.component.css'
+  styleUrl: './table.component.css',
 })
 export class TableComponent {
   @Input() data!: any[];

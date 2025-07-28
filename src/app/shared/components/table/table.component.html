@@ -25,7 +25,7 @@
       <tbody>
         @for (row of data; track $index) {
         <tr class="border-b border-gray-50">
-          @for (col of columns; track $index) {
+          @for (col of columns; track $index) { @if (col !== 'action') {
           <td class="p-4">
             <p
               class="text-sm font-normal text-blue-gray-900 rounded-lg text-center"
@@ -34,14 +34,32 @@
               {{ row[col] }}
             </p>
           </td>
-          }
+          } @else {
+          <td class="p-4 flex justify-between items-center gap-2">
+            <app-button-icon
+              [icon]="'heroEye'"
+              [showBorder]="false"
+              [color]="'text-blue-700'"
+            />
+            <app-button-icon
+              [icon]="'heroPencil'"
+              [showBorder]="false"
+              [color]="'text-green-700'"
+            />
+            <app-button-icon
+              [icon]="'heroTrash'"
+              [showBorder]="false"
+              [color]="'text-red-700'"
+            />
+          </td>
+          } }
         </tr>
         }
       </tbody>
     </table>
   </div>
   } @else {
-    <p class="p-10 mx-auto">Oops there is no data to show...</p>
+  <p class="p-10 mx-auto">Oops there is no data to show...</p>
   }
 
   <div class="h-12 bg-white flex items-center justify-center z-50 relative">

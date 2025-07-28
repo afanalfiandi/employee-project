@@ -23,7 +23,6 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
   private _breadcrumbService = inject(BreadcrumbsService);
   private _employeeService = inject(EmployeeService);
   private _loadingService = inject(LoadingService);
-  private _cdr = inject(ChangeDetectorRef);
 
   isLoading$ = this._loadingService._isLoading$;
   searchForm!: FormGroup;
@@ -34,6 +33,7 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
     'email',
     'birthDate',
     'status',
+    'action'
   ];
 
   employee: Employee[] = [];
