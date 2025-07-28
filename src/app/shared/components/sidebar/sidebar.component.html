@@ -1,0 +1,26 @@
+<aside
+  class="fixed top-0 left-0 z-50 h-screen w-[20rem] bg-white shadow-xl transition-transform duration-300 ease-in-out md:static md:translate-x-0"
+  [ngClass]="{
+    'translate-x-0': _showSidebar$ | async,
+    '-translate-x-full': !(_showSidebar$ | async),
+    block: true
+  }"
+>
+  <div class="p-4 mb-2">
+    <h5 class="text-xl font-semibold text-blue-gray-900">Project Management</h5>
+  </div>
+  <nav class="flex flex-col text-base text-blue-gray-700">
+    @for (n of nav; track $index) {
+    <a
+      [routerLink]="n.path"
+      [routerLinkActive]="'font-semibold'"
+      class="p-3 flex items-center hover:bg-gray-50 transition-all duration-300"
+    >
+      <div class="grid mr-4 place-items-center">
+        <ng-icon [name]="n.icon" class="w-5 h-5"></ng-icon>
+      </div>
+      {{ n.label }}
+    </a>
+    }
+  </nav>
+</aside>
