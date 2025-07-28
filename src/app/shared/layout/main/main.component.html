@@ -1,0 +1,7 @@
+@if (_isLoading$ | async; as loading) {
+<app-loading></app-loading>
+}
+<div class="w-screen h-screen bg-gray-100">
+  <app-sidebar></app-sidebar>
+  <router-outlet></router-outlet>
+</div>
