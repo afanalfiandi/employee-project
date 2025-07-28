@@ -1,0 +1,16 @@
+<nav aria-label="breadcrumb">
+  <ol
+    class="flex w-full flex-wrap items-center border-t border-b border-slate-100 bg-white px-4 py-6"
+  >
+    @for (bc of _breadCrumbs$ | async; track $index; let last = $last) {
+    <li
+      class="flex cursor-pointer items-center text-sm text-slate-500 transition-colors duration-300 hover:text-slate-800"
+    >
+      <a [href]="bc.path">{{ bc.label }}</a>
+      @if (!last) {
+      <span class="pointer-events-none mx-2 text-slate-800"> / </span>
+      }
+    </li>
+    }
+  </ol>
+</nav>
