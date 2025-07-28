@@ -7,12 +7,13 @@ import { InputComponent } from "../../shared/components/input/input.component";
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from "../../shared/components/button/button.component";
 import { EmployeeService } from './employee.service';
-import { debounceTime, tap } from 'rxjs';
+import { debounceTime, takeUntil, tap } from 'rxjs';
 import { Employee } from '../../shared/interfaces/employee.interface';
 import { TableComponent } from "../../shared/components/table/table.component";
 import { CommonModule } from '@angular/common';
 import { LoadingService } from '../../shared/components/loading/loading.service';
 import { PaginationService } from '../../shared/components/pagination/pagination.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee',
@@ -25,6 +26,7 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
   private _employeeService = inject(EmployeeService);
   private _loadingService = inject(LoadingService);
   private _paginationService = inject(PaginationService);
+  private _router = inject(Router);
 
   isLoading$ = this._loadingService._isLoading$;
   searchForm!: FormGroup;
@@ -66,6 +68,7 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
 
   getEmployee(keyword?: string) {
     this._employeeService.get(keyword).pipe(
+      takeUntil(this._onDestroy$),
       tap((res) => {
         this.employee = res;
       })
@@ -75,6 +78,7 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
   searchEmployee() {
     this.searchForm.get('keyword')?.valueChanges
       .pipe(
+        takeUntil(this._onDestroy$),
         debounceTime(300),
         tap((keyword) => {
           this._paginationService._pagination$.next({
@@ -87,11 +91,12 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
   }
 
   onAdd() {
-    console.log('clicked')
+    this._router.navigate(['/employee/create']);
   }
 
   paginationRefresh() {
     this._paginationService.refresh$.pipe(
+      takeUntil(this._onDestroy$),
       tap(() => {
         this.getEmployee(this.searchForm.get('keyword')?.value);
       })
