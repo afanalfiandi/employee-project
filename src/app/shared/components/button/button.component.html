@@ -1,0 +1,22 @@
+<button
+  class="w-full p-2 rounded-lg text-white hover:bg-blue-950 transition-all ease-in-out duration-200 hover:shadow-lg"
+  [ngClass]="{
+    'border border-blue-900 bg-blue-900':
+      variant === 'primary' && mode !== 'outline',
+    'border border-red-900 bg-red-900':
+      variant === 'danger' && mode !== 'outline',
+    'border border-green-800 bg-green-800':
+      variant === 'success' && mode !== 'outline',
+    'border border-yellow-800 bg-yellow-800':
+      variant === 'warning' && mode !== 'outline',
+    'bg-white border-blue-900': variant === 'primary' && mode === 'outline',
+    'bg-white border-red-900': variant === 'danger' && mode === 'outline',
+    'bg-white border-green-800': variant === 'success' && mode === 'outline',
+    'bg-white border-yellow-800': variant === 'warning' && mode === 'outline',
+    'opacity-55': isDisabled
+  }"
+  [type]="type"
+  [disabled]="isDisabled"
+>
+  {{ label }}
+</button>
