@@ -1,7 +1,7 @@
 <div class="my-2 py-2 flex-col flex gap-2">
+  @if (label) {
   <label [for]="label" class="font-medium">{{ label }}</label>
-
-  @if (type === 'text' || type === 'number' || type === 'password') {
+  } @if (type === 'text' || type === 'number' || type === 'password') {
   <input
     *ngIf="control"
     [type]="type"
@@ -9,14 +9,6 @@
     [placeholder]="placeholder"
     [formControl]="control"
   />
-  } @else if (type === 'select') {
-  <select
-    class="p-2 bg-white rounded-lg border border-gray-300"
-    *ngIf="control"
-    [formControl]="control"
-  >
-    <option value="1">1</option>
-  </select>
   }
 
   <small *ngIf="control?.touched && control?.invalid" class="text-red-600">

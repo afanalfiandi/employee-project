@@ -23,7 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() label!: string;
-  @Input() type: 'text' | 'number' | 'password' | 'select' = 'text';
+  @Input() type: 'text' | 'number' | 'password' = 'text';
   @Input() placeholder!: string;
   @Input() form!: FormGroup;
   @Input() formControlName!: string;
@@ -65,7 +65,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   onTouched: () => void = () => { };
 
   handleInput(event: Event) {
-    const input = event.target as HTMLInputElement | HTMLSelectElement;
+    const input = event.target as HTMLInputElement;
     this.onChange(input.value);
     this.onTouched();
   }
