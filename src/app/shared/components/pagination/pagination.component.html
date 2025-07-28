@@ -2,12 +2,18 @@
 <div
   class="p-2 w-full absolute bottom-0 left-0 right-0 h-full flex justify-between items-center text-sm text-gray-600"
 >
-  <p>Showing result of {{ pagination.totalItems }}</p>
+  <p>
+    Showing {{ pagination.totalItems }}
+    {{ pagination.totalItems === 1 ? "result" : "results" }}
+  </p>
 
   <div class="flex gap-2 items-center">
     <p>Items per page</p>
 
-    <select class="p-2 bg-white rounded-lg border border-gray-300">
+    <select
+      class="p-2 bg-white rounded-lg border border-gray-300"
+      (change)="onPerPageChange($event)"
+    >
       @for (opt of itemPerPageOpt; track $index) {
       <option [value]="opt.value" [selected]="pagination.perPage === opt.value">
         {{ opt.label }}
@@ -22,12 +28,11 @@
       [disabled]="pagination.page <= 1"
     />
     <p>{{ pagination.page }}</p>
-    <button
-      class="border p-1 rounded-md border-gray-400 flex items-center justify-center"
+    <app-button-icon
+      [icon]="'heroChevronRight'"
+      (click)="onChangePage('next')"
       [disabled]="pagination.page >= pagination.totalPage"
-    >
-      <ng-icon name="heroChevronRight" (click)="onChangePage('next')"></ng-icon>
-    </button>
+    />
   </div>
 </div>
 }

@@ -1,8 +1,8 @@
 <button
-  class="p-1 rounded-md border-gray-400 flex items-center justify-center"
+  class="p-1 rounded-md border-gray-400 flex items-center justify-center duration-200 transition-all ease-in-out"
   [ngClass]="{
     'opacity-50': disabled,
-    'opacity-100': !disabled,
+    'opacity-100 cursor-pointer hover:scale-125': !disabled,
     border: showBorder,
   }"
   [class]="color ? color : ''"

@@ -6,6 +6,7 @@ import { Pagination } from "../../../core/interfaces/pagination.interface";
     providedIn: 'root'
 })
 export class PaginationService {
+    refresh$ = new BehaviorSubject<void>(undefined);
     _pagination$ = new BehaviorSubject<Pagination>({
         page: 1,
         totalItems: 0,
@@ -14,27 +15,17 @@ export class PaginationService {
     })
 
     onPageChange(action: 'next' | 'prev') {
-        const currentPagination = this._pagination$.value;
+        const current = this._pagination$.value;
+        const newPage = action === 'next' ? current.page + 1 : current.page - 1;
 
-        if (action === 'next') {
-            this._pagination$.next({
-                ...currentPagination,
-                page: currentPagination.page + 1
-            })
-        } else {
-            this._pagination$.next({
-                ...currentPagination,
-                page: currentPagination.page - 1
-            })
-        }
+        this._pagination$.next({ ...current, page: newPage });
+        this.refresh$.next();
     }
 
     onPerPageChange(total: number) {
-        const currentPagination = this._pagination$.value;
+        const current = this._pagination$.value;
 
-        this._pagination$.next({
-            ...currentPagination,
-            perPage: total
-        })
+        this._pagination$.next({ ...current, perPage: total, page: 1 });
+        this.refresh$.next();
     }
 }
