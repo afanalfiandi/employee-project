@@ -1,0 +1,12 @@
+<div
+  class="fixed inset-0 z-[9999] flex justify-center items-center backdrop-blur-3xl"
+>
+  <div class="flex justify-around items-center gap-2">
+    @for (item of dots; track $index) {
+    <div
+      class="w-3 h-3 rounded-full bg-white shadow animate-bounce"
+      [ngStyle]="{ animationDelay: $index * 0.2 + 's' }"
+    ></div>
+    }
+  </div>
+</div>
