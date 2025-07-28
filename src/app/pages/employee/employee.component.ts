@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { BreadcrumbsService } from '../../shared/components/breadcrumbs/breadcrumbs.service';
 import { BaseComponent } from '../../core/components/base.component';
 import { Breadcrumb } from '../../shared/components/breadcrumbs/breadcrumbs.interface';
@@ -7,10 +7,11 @@ import { InputComponent } from "../../shared/components/input/input.component";
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from "../../shared/components/button/button.component";
 import { EmployeeService } from './employee.service';
-import { tap } from 'rxjs';
+import { debounceTime, delay, startWith, switchMap, tap } from 'rxjs';
 import { Employee } from '../../shared/interfaces/employee.interface';
 import { TableComponent } from "../../shared/components/table/table.component";
 import { CommonModule } from '@angular/common';
+import { LoadingService } from '../../shared/components/loading/loading.service';
 
 @Component({
   selector: 'app-employee',
@@ -21,7 +22,10 @@ import { CommonModule } from '@angular/common';
 export class EmployeeComponent extends BaseComponent implements OnInit {
   private _breadcrumbService = inject(BreadcrumbsService);
   private _employeeService = inject(EmployeeService);
+  private _loadingService = inject(LoadingService);
+  private _cdr = inject(ChangeDetectorRef);
 
+  isLoading$ = this._loadingService._isLoading$;
   searchForm!: FormGroup;
   tableColumns: string[] = [
     'username',
@@ -31,13 +35,15 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
     'birthDate',
     'status',
   ];
-  _employees$ = this._employeeService.employee$;
+
+  employee: Employee[] = [];
 
   ngOnInit(): void {
     this.searchForm = new FormGroup({
       keyword: new FormControl('')
     });
 
+    this.searchEmployee();
     this.setBreadcrumb();
     this.getEmployee();
   }
@@ -53,11 +59,28 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
   }
 
   getEmployee() {
-    this._employeeService.employee$.pipe(
-      tap((employee: Employee[]) => {
-        console.log(employee)
+    this._employeeService._employee$.pipe(
+      tap(() => {
+        setTimeout(() => {
+          this._loadingService.show();
+        });
+      }),
+      delay(2000),
+      tap((res) => {
+        this.employee = res;
+        this._loadingService.hide();
       })
-    ).subscribe()
+    ).subscribe();
+  }
+
+
+  searchEmployee() {
+    this.searchForm.get('keyword')?.valueChanges
+      .pipe(debounceTime(300),
+        startWith(''),
+        switchMap((value: string) => this._employeeService.search(value)),
+        tap((res) => this.employee = res)
+      ).subscribe()
   }
 
   onAdd() {

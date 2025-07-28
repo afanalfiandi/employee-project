@@ -24,7 +24,5 @@
     </div>
   </div>
 
-  @if (_employees$ | async; as employee) {
   <app-table [columns]="tableColumns" [data]="employee"></app-table>
-  }
 </app-card>
