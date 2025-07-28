@@ -31,20 +31,15 @@
               class="text-sm font-normal text-blue-gray-900 rounded-lg text-center"
               [ngClass]="getRowClass(col, row)"
             >
-              {{ row[col] }}
+              {{ col !== "birthDate" ? row[col] : (row[col] | dateFormatter) }}
             </p>
           </td>
           } @else {
           <td class="p-4 flex justify-between items-center gap-2">
             <app-button-icon
-              [icon]="'heroEye'"
-              [showBorder]="false"
-              [color]="'text-blue-700'"
-            />
-            <app-button-icon
               [icon]="'heroPencil'"
               [showBorder]="false"
-              [color]="'text-green-700'"
+              [color]="'text-yellow-500'"
             />
             <app-button-icon
               [icon]="'heroTrash'"

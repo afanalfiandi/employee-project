@@ -35,7 +35,10 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
     'email',
     'birthDate',
     'status',
-    'action'
+    'basicSalary',
+    'group',
+    'description',
+    'action',
   ];
 
   employee: Employee[] = [];

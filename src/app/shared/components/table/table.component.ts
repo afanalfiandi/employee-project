@@ -3,10 +3,11 @@ import { TitleFormatterPipe } from '../../pipes/title-formatter.pipe';
 import { CommonModule } from '@angular/common';
 import { PaginationComponent } from "../pagination/pagination.component";
 import { ButtonIconComponent } from "../button-icon/button-icon.component";
+import { DateFormatterPipe } from '../../pipes/date-formatter.pipe';
 
 @Component({
   selector: 'app-table',
-  imports: [TitleFormatterPipe, CommonModule, PaginationComponent, ButtonIconComponent],
+  imports: [TitleFormatterPipe, CommonModule, PaginationComponent, ButtonIconComponent, DateFormatterPipe],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css',
 })
