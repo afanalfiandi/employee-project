@@ -70,24 +70,27 @@
           />
         </div>
 
-        <div class="w-full md:w-[calc(50%-0.5rem)]">
-          <app-input
+        <div class="w-full md:w-[calc(50%-0.5rem)] py-2 flex-col flex gap-2">
+          <label for="Status" class="font-medium">Status</label>
+          <select
+            class="p-2 bg-white w-full block rounded-lg border border-gray-300 text-gray-800 focus:outline-0"
             formControlName="status"
-            [label]="'Status'"
-            [placeholder]="'Insert status'"
-            [type]="'text'"
-            [form]="form"
-          />
+          >
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
         </div>
 
-        <div class="w-full md:w-[calc(50%-0.5rem)]">
-          <app-input
+        <div class="w-full md:w-[calc(50%-0.5rem)] py-2 flex-col flex gap-2">
+          <label for="Group" class="font-medium">Group</label>
+          <select
+            class="p-2 bg-white w-full block rounded-lg border border-gray-300 text-gray-800 focus:outline-0"
             formControlName="group"
-            [label]="'Group'"
-            [placeholder]="'Insert group'"
-            [type]="'text'"
-            [form]="form"
-          />
+          >
+            <option value="IT">IT</option>
+            <option value="HR">HR</option>
+            <option value="Finance">Finance</option>
+          </select>
         </div>
 
         <div class="w-full">

@@ -7,6 +7,8 @@ import { InputComponent } from "app/shared/components/input/input.component";
 import { ButtonComponent } from "app/shared/components/button/button.component";
 import { numberValidator } from 'app/core/validators/number.validator';
 import { EmployeeService } from '../employee.service';
+import { Toast } from 'app/shared/utils/toast.util';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -15,6 +17,7 @@ import { EmployeeService } from '../employee.service';
   styleUrl: './form.component.css'
 })
 export class FormComponent implements OnInit {
+  private _router = inject(Router);
   private _breadcrumbService = inject(BreadcrumbsService);
   private _employeeService = inject(EmployeeService);
 
@@ -64,6 +67,18 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form.value)
+    const currentEmployees = this._employeeService._employee$.value;
+
+    const updatedEmployees = [
+      ...currentEmployees,
+      this.form.value
+    ];
+
+    console.log(updatedEmployees)
+
+    this._employeeService._employee$.next(updatedEmployees);
+    this.form.reset();
+    Toast('success', 'Success');
+    this._router.navigate(['/employee'])
   }
 }
