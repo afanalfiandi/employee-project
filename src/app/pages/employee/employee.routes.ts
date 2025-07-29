@@ -10,7 +10,7 @@ export default [
         children: [
             { path: '', component: EmployeeComponent },
             { path: 'create', component: FormComponent },
-            { path: 'update/:roleId', component: FormComponent },
+            { path: 'update/:username', component: FormComponent },
         ],
     },
 ] as Routes;

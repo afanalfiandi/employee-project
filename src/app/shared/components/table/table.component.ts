@@ -33,7 +33,6 @@ export class TableComponent {
   }
 
   onEdit(row: any) {
-    console.log(row)
     this.edit.emit(row);
   }
 }
