@@ -29,7 +29,7 @@ A mini project built with Angular that demonstrates basic employee management fu
   - Save and Cancel buttons
 
 - **Employee Detail Page**
-  - Shows formatted employee detail (e.g., salary in `Rp. xx.xxx,xx`)
+  - Shows formatted employee detail.
   - “OK” button returns to list and retains previous search/filter state
 
 ## 👤 Employee Data Structure
