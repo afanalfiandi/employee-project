@@ -9,14 +9,17 @@ import { AuthService } from 'app/pages/auth/auth.service';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+  /* Inject service */
   private _sidebarService = inject(SidebarService);
   private _authService = inject(AuthService);
 
+  // show sidebar method based on current value
   showSidebar() {
     const isSidebarShowed = this._sidebarService._show$.value;
     this._sidebarService.toggle(!isSidebarShowed)
   }
 
+  // logout function
   onLogout() {
     this._authService.logout();
   }

@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './loading.component.css'
 })
 export class LoadingComponent {
-  dots = Array(3).fill(0);
+  dots = Array(3).fill(0); // Circle animation 
 }

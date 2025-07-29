@@ -11,12 +11,15 @@ import { Breadcrumb } from '../../shared/components/breadcrumbs/breadcrumbs.inte
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent extends BaseComponent implements OnInit {
+  // Inject the breadcrumbs service to manage breadcrumb navigation
   private _breadcrumbService = inject(BreadcrumbsService);
 
+  // Lifecycle hook called after component is initialized
   ngOnInit(): void {
     this.setBreadcrumb();
   }
-  
+
+  // Set a single breadcrumb for the dashboard page
   setBreadcrumb() {
     const breadcrumbs: Breadcrumb[] = [
       {

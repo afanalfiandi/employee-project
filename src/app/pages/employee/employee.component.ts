@@ -23,14 +23,20 @@ import { Confirmable } from 'app/shared/utils/confirmable.util';
   styleUrl: './employee.component.css'
 })
 export class EmployeeComponent extends BaseComponent implements OnInit {
+  // Inject necessary services
   private _breadcrumbService = inject(BreadcrumbsService);
   private _employeeService = inject(EmployeeService);
   private _loadingService = inject(LoadingService);
   private _paginationService = inject(PaginationService);
   private _router = inject(Router);
 
+  // Observable to track loading state
   isLoading$ = this._loadingService._isLoading$;
+
+  // Search form group
   searchForm!: FormGroup;
+
+  // Define table columns
   tableColumns: string[] = [
     'username',
     'firstName',
@@ -44,19 +50,29 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
     'action',
   ];
 
+  // Data source for employee list
   employee: Employee[] = [];
 
   ngOnInit(): void {
+    // Initialize search form
     this.searchForm = new FormGroup({
       keyword: new FormControl('')
     });
 
+    // Fetch initial employee list
     this.getEmployee();
+
+    // Setup pagination refresh handler
     this.paginationRefresh();
+
+    // Handle search form input changes
     this.searchEmployee();
+
+    // Set breadcrumb navigation
     this.setBreadcrumb();
   }
 
+  // Set breadcrumb path for current page
   setBreadcrumb() {
     const breadcrumbs: Breadcrumb[] = [
       {
@@ -67,6 +83,7 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
     this._breadcrumbService.set(breadcrumbs)
   }
 
+  // Fetch employee data (optionally with keyword search)
   getEmployee(keyword?: string) {
     this._employeeService.get(keyword).pipe(
       takeUntil(this._onDestroy$),
@@ -76,12 +93,14 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
     ).subscribe();
   }
 
+  // Listen to keyword changes and fetch filtered employees
   searchEmployee() {
     this.searchForm.get('keyword')?.valueChanges
       .pipe(
         takeUntil(this._onDestroy$),
         debounceTime(300),
         tap((keyword) => {
+          // Reset pagination to page 1
           this._paginationService._pagination$.next({
             ...this._paginationService._pagination$.value,
             page: 1,
@@ -91,14 +110,17 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
       .subscribe();
   }
 
+  // Navigate to employee creation form
   onAdd() {
     this._router.navigate(['/employee/create']);
   }
 
+  // Navigate to employee update form with selected data
   onEdit(data: Employee) {
     this._router.navigate(['/employee/update', data.username])
   }
 
+  // Show confirmation dialog before deleting an employee
   onDelete(data: Employee) {
     const icon = "warning"
     const msg = "Are you sure you want to delete this data?";
@@ -108,6 +130,7 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
     Confirmable(icon, msg, title, confirmBtn, () => this.deleteEmployee(data.username));
   }
 
+  // Refresh employee list when pagination changes
   paginationRefresh() {
     this._paginationService.refresh$.pipe(
       takeUntil(this._onDestroy$),
@@ -117,6 +140,7 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
     ).subscribe();
   }
 
+  // Call service to delete employee
   deleteEmployee(username: string) {
     this._employeeService.delete(username)
   }

@@ -22,14 +22,23 @@ export class AuthComponent extends BaseComponent implements OnInit {
   form!: FormGroup;
 
   ngOnInit(): void {
+    // Initialize auth form group
     this.form = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     });
 
+    // Check if user is logged in by token
     this.checkToken();
   }
 
+  /*
+    This method handles the login authentication process.
+    It first checks if the form is valid, then retrieves the username and password values.
+    If valid, it calls the authentication service to verify credentials.
+    If the response is successful, the user is redirected to the dashboard.
+    Otherwise, an error toast is shown indicating incorrect credentials.
+  */
   onAuth() {
     if (this.form.valid) {
       const username = this.form.get('username')?.value;
@@ -47,8 +56,9 @@ export class AuthComponent extends BaseComponent implements OnInit {
   }
 
   checkToken() {
-    const isLoggedIn = this._authService.isLoggedIn();
+    const isLoggedIn = this._authService.isLoggedIn(); // log in status from auth service
 
+    // if user is logged in, then redirect user to dashboard page
     if (isLoggedIn) {
       this._router.navigate(['/dashboard'])
     }

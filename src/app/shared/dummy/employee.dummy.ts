@@ -1,5 +1,6 @@
 import { Employee } from "../interfaces/employee.interface";
 
+// A method to generate data with a specified number of data entries. The output will be an employee data
 function generateDummyEmployees(count: number): Employee[] {
     return Array.from({ length: count }, (_, i) => ({
         username: `user${i + 1}`,

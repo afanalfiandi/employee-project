@@ -12,11 +12,18 @@ import { DateFormatterPipe } from '../../pipes/date-formatter.pipe';
   styleUrl: './table.component.css',
 })
 export class TableComponent {
+  // Bind data table
   @Input() data!: any[];
+  // Bind data columns
   @Input() columns!: string[];
+  // Event emitter for edit feature per row
   @Output() edit = new EventEmitter();
+  // Event emitter for delete feature per row
   @Output() delete = new EventEmitter();
 
+  /* 
+    This is a method to get row class especially to status columns
+  */
   getRowClass(col: string, row: any): string {
     if (col === 'status') {
       const statusClassMap: Record<string, string> = {
@@ -33,10 +40,14 @@ export class TableComponent {
     return '';
   }
 
+  // Emits the 'edit' event with one parameter.
+  // The parameter is typed as 'any' for flexibility and future-proofing.
   onEdit(row: any) {
     this.edit.emit(row);
   }
 
+  // Emits the 'delet' event with one parameter.
+  // The parameter is typed as 'any' for flexibility and future-proofing.
   onDelete(row: any) {
     this.delete.emit(row);
   }

@@ -8,6 +8,9 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 export class LocalstorageService implements LocalStorageServiceInterface {
+    /* 
+        There are so many mechanism to store data in local storage. It is integrated with crypto-js to encrypt stored data to implement security
+    */
     private _result: string = '';
 
     constructor() { }

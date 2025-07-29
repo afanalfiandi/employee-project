@@ -16,12 +16,16 @@ import { AuthService } from 'app/pages/auth/auth.service';
   providers: [provideIcons(APP_ICONS)]
 })
 export class SidebarComponent {
+  // inject service
   private _sidebarService = inject(SidebarService);
   private _authService = inject(AuthService);
 
+  // Observable to store sidebar status from service
   _showSidebar$ = this._sidebarService._show$;
+  // nav const data
   nav = SIDENAV;
 
+  // logout method integrated with auth service
   onLogout() {
     this._authService.logout();
   }

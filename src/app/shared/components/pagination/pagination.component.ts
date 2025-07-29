@@ -12,15 +12,20 @@ import { CommonModule } from '@angular/common';
   styleUrl: './pagination.component.css',
 })
 export class PaginationComponent {
+  // Inject necessary service
   private _paginationService = inject(PaginationService);
 
+  // Observable to store pagination data from service
   _pagination$ = this._paginationService._pagination$;
+  // Store option data
   itemPerPageOpt: Option[] = ITEMS_PER_PAGE_OPTION;
 
+  /* Method to paginate with 2 parameter (next or prev) */
   onChangePage(action: 'next' | 'prev') {
     this._paginationService.onPageChange(action)
   }
 
+  // Method to trigger display per page value
   onPerPageChange(event: Event): void {
     const value = (event.target as HTMLSelectElement).value;
     this._paginationService.onPerPageChange(+value);
