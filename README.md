@@ -1,59 +1,70 @@
-# EmployeeProject
+# Employee Management - Angular Mini Project
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.8.
+A mini project built with Angular that demonstrates basic employee management functionality. The app implements **responsive web design**, functional **login**, **data listing with search/sort/pagination**, and **form handling with validation** across four main pages.
 
-## Development server
+## 🧩 Features
 
-To start a local development server, run:
+- **Login Page**  
+  Hardcoded username/password authentication with basic form validation.
+  For example, you can use this credentials:
+- **Credentials**
 
-```bash
-ng serve
+  - username : abc123
+  - password : 123123123
+
+- **Employee List Page**
+
+  - Displays 100+ dummy employees
+  - Pagination, sorting, searching (AND logic with 2+ fields)
+  - Page size selection
+  - Add employee button
+  - Edit/Delete action buttons with colored toast notifications
+
+- **Add Employee Page**
+
+  - Full employee form with validation
+  - Datepicker for birthdate (must not be in the future)
+  - Email and numeric field validation
+  - Group dropdown with searchable list
+  - Save and Cancel buttons
+
+- **Employee Detail Page**
+  - Shows formatted employee detail (e.g., salary in `Rp. xx.xxx,xx`)
+  - “OK” button returns to list and retains previous search/filter state
+
+## 👤 Employee Data Structure
+
+Each employee has the following attributes:
+
+```json
+{
+  "username": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "birthDate": "datetime",
+  "basicSalary": "double",
+  "status": "string",
+  "group": "string",
+  "description": "datetime"
+}
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 👤 Env Configuration
+To run this Angular project properly, you need to configure the environment file.
 
-## Code scaffolding
+### 📂 Step-by-step Instructions:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. **Go to the folder:**
+    - src/environments/
+2. **Create a new file named:**
+    - environment.development.ts
+3. **Copy the content from `environment.ts` into this new file, and make sure it looks like this:**
 
-```bash
-ng generate component component-name
-```
+```ts
+import { EnvironmentInterface } from "./environment.interface";
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+export const environment: EnvironmentInterface = {
+  production: false,
+  LOCALKEY: 'qwertyuiop123456789+@',
+};
