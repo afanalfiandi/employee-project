@@ -40,6 +40,7 @@
               [icon]="'heroPencil'"
               [showBorder]="false"
               [color]="'text-yellow-500'"
+              (click)="onEdit(row[col])"
             />
             <app-button-icon
               [icon]="'heroTrash'"

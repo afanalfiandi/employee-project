@@ -102,4 +102,8 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
       })
     ).subscribe();
   }
+
+  onEdit(event: any) {
+    console.log('edit clicked', event)
+  }
 }

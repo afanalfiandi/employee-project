@@ -2,4 +2,120 @@
   <div class="flex p-2 justify-between items-center">
     <h2 class="text-lg font-semibold">Create Employee</h2>
   </div>
+
+  <div class="overflow-y-auto">
+    <form
+      [formGroup]="form"
+      (submit)="onSubmit()"
+      class="flex flex-col gap-6 p-4"
+    >
+      <div class="flex flex-wrap gap-4">
+        <div class="w-full md:w-[calc(50%-0.5rem)]">
+          <app-input
+            formControlName="username"
+            [label]="'Username'"
+            [placeholder]="'Insert username'"
+            [type]="'text'"
+            [form]="form"
+          />
+        </div>
+
+        <div class="w-full md:w-[calc(50%-0.5rem)]">
+          <app-input
+            formControlName="firstName"
+            [label]="'First Name'"
+            [placeholder]="'Insert first name'"
+            [type]="'text'"
+            [form]="form"
+          />
+        </div>
+
+        <div class="w-full md:w-[calc(50%-0.5rem)]">
+          <app-input
+            formControlName="lastName"
+            [label]="'Last Name'"
+            [placeholder]="'Insert last name'"
+            [type]="'text'"
+            [form]="form"
+          />
+        </div>
+
+        <div class="w-full md:w-[calc(50%-0.5rem)]">
+          <app-input
+            formControlName="email"
+            [label]="'Email'"
+            [placeholder]="'Insert email'"
+            [type]="'text'"
+            [form]="form"
+          />
+        </div>
+
+        <div class="w-full md:w-[calc(50%-0.5rem)]">
+          <app-input
+            formControlName="birthDate"
+            [label]="'Birth Date'"
+            [placeholder]="'Insert birth date'"
+            [type]="'datetime-local'"
+            [form]="form"
+          />
+        </div>
+
+        <div class="w-full md:w-[calc(50%-0.5rem)]">
+          <app-input
+            formControlName="basicSalary"
+            [label]="'Basic Salary'"
+            [placeholder]="'Insert basic salary'"
+            [type]="'number'"
+            [form]="form"
+          />
+        </div>
+
+        <div class="w-full md:w-[calc(50%-0.5rem)]">
+          <app-input
+            formControlName="status"
+            [label]="'Status'"
+            [placeholder]="'Insert status'"
+            [type]="'text'"
+            [form]="form"
+          />
+        </div>
+
+        <div class="w-full md:w-[calc(50%-0.5rem)]">
+          <app-input
+            formControlName="group"
+            [label]="'Group'"
+            [placeholder]="'Insert group'"
+            [type]="'text'"
+            [form]="form"
+          />
+        </div>
+
+        <div class="w-full">
+          <app-input
+            formControlName="description"
+            [label]="'Description'"
+            [placeholder]="'Insert description'"
+            [type]="'textarea'"
+            [form]="form"
+          />
+        </div>
+      </div>
+
+      <div class="flex justify-end items-center gap-4">
+        <app-button
+          [label]="'Cancel'"
+          [mode]="'outline'"
+          [variant]="'primary'"
+          [type]="'button'"
+        />
+        <app-button
+          [label]="'Save'"
+          [mode]="'fill'"
+          [variant]="'primary'"
+          [type]="'submit'"
+          [isDisabled]="form.invalid"
+        />
+      </div>
+    </form>
+  </div>
 </app-card>

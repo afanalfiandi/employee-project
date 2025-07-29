@@ -1,17 +1,37 @@
-<div class="my-2 py-2 flex-col flex gap-2">
+<div class="py-2 flex-col flex gap-2">
   @if (label) {
   <label [for]="label" class="font-medium">{{ label }}</label>
-  } @if (type === 'text' || type === 'number' || type === 'password') {
+  } @if (type === 'text' || type === 'number' || type === 'password' || type ===
+  'datetime-local') {
   <input
     *ngIf="control"
     [type]="type"
-    class="p-2 bg-white rounded-lg border border-gray-300 text-gray-800 focus:outline-0"
+    class="p-2 bg-white w-full block rounded-lg border border-gray-300 text-gray-800 focus:outline-0"
     [placeholder]="placeholder"
     [formControl]="control"
+    [max]="nowDatetimeLocal"
   />
+  } @else if (type === 'textarea') {
+  <textarea
+    *ngIf="control"
+    class="p-2 bg-white w-full block rounded-lg border border-gray-300 text-gray-800 focus:outline-0"
+    [formControl]="control"
+  ></textarea>
   }
 
   <small *ngIf="control?.touched && control?.invalid" class="text-red-600">
     *{{ label }} is required
+  </small>
+  <small
+    *ngIf="control?.touched && control?.hasError('email')"
+    class="text-red-600"
+  >
+    *{{ label }} must be an email
+  </small>
+  <small
+    *ngIf="form.get('basicSalary')?.errors?.['notNumber']"
+    class="text-red-600"
+  >
+    *{{ label }} must be a number
   </small>
 </div>

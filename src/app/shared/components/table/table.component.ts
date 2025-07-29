@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TitleFormatterPipe } from '../../pipes/title-formatter.pipe';
 import { CommonModule } from '@angular/common';
 import { PaginationComponent } from "../pagination/pagination.component";
@@ -14,6 +14,7 @@ import { DateFormatterPipe } from '../../pipes/date-formatter.pipe';
 export class TableComponent {
   @Input() data!: any[];
   @Input() columns!: string[];
+  @Output() edit = new EventEmitter();
 
   getRowClass(col: string, row: any): string {
     if (col === 'status') {
@@ -29,5 +30,10 @@ export class TableComponent {
     }
 
     return '';
+  }
+
+  onEdit(row: any) {
+    console.log(row)
+    this.edit.emit(row);
   }
 }

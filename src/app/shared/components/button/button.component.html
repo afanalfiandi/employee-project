@@ -1,7 +1,7 @@
 <button
-  class="w-full p-2 rounded-lg text-white hover:bg-blue-950 transition-all ease-in-out duration-200 hover:shadow-lg"
+  class="w-full p-2 rounded-lg border hover:border transition-all ease-in-out duration-100 hover:shadow-lg"
   [ngClass]="{
-    'border border-blue-900 bg-blue-900':
+    'border border-blue-900 text-white bg-blue-900':
       variant === 'primary' && mode !== 'outline',
     'border border-red-900 bg-red-900':
       variant === 'danger' && mode !== 'outline',
@@ -9,10 +9,14 @@
       variant === 'success' && mode !== 'outline',
     'border border-yellow-800 bg-yellow-800':
       variant === 'warning' && mode !== 'outline',
-    'bg-white border-blue-900': variant === 'primary' && mode === 'outline',
-    'bg-white border-red-900': variant === 'danger' && mode === 'outline',
-    'bg-white border-green-800': variant === 'success' && mode === 'outline',
-    'bg-white border-yellow-800': variant === 'warning' && mode === 'outline',
+    'bg-white border border-blue-900 text-black':
+      variant === 'primary' && mode === 'outline',
+    'bg-white border border-red-900 text-black':
+      variant === 'danger' && mode === 'outline',
+    'bg-white border border-green-800 text-black':
+      variant === 'success' && mode === 'outline',
+    'bg-white border border-yellow-800 text-black':
+      variant === 'warning' && mode === 'outline',
     'opacity-55': isDisabled
   }"
   [type]="type"

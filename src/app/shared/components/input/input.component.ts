@@ -23,7 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() label!: string;
-  @Input() type: 'text' | 'number' | 'password' = 'text';
+  @Input() type: 'text' | 'number' | 'password' | 'textarea' | 'datetime-local' = 'text';
   @Input() placeholder!: string;
   @Input() form!: FormGroup;
   @Input() formControlName!: string;
@@ -68,5 +68,16 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     const input = event.target as HTMLInputElement;
     this.onChange(input.value);
     this.onTouched();
+  }
+
+
+  get nowDatetimeLocal(): string {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const date = String(now.getDate()).padStart(2, '0');
+    const hour = String(now.getHours()).padStart(2, '0');
+    const minute = String(now.getMinutes()).padStart(2, '0');
+    return `${year}-${month}-${date}T${hour}:${minute}`;
   }
 }
