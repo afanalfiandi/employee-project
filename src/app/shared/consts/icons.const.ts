@@ -1,4 +1,4 @@
-import { heroChevronLeft, heroChevronRight, heroHome, heroUser, heroPlus, heroBuildingOffice, heroPencil, heroEye, heroTrash } from '@ng-icons/heroicons/outline';
+import { heroChevronLeft, heroChevronRight, heroHome, heroUser, heroPlus, heroBuildingOffice, heroPencil, heroEye, heroTrash, heroPower } from '@ng-icons/heroicons/outline';
 
 export const APP_ICONS = {
     heroChevronLeft,
@@ -9,5 +9,6 @@ export const APP_ICONS = {
     heroHome,
     heroPencil,
     heroEye,
-    heroTrash
+    heroTrash,
+    heroPower
 };

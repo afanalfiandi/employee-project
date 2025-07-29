@@ -100,4 +100,8 @@ export class FormComponent implements OnInit {
     this.form.reset();
     this._router.navigate(['/employee']);
   }
+
+  onCancel() {
+    this._router.navigate(['/employee'])
+  }
 }

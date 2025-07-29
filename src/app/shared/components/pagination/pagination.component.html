@@ -1,6 +1,6 @@
 @if (_pagination$ | async; as pagination) {
 <div
-  class="p-2 w-full absolute bottom-0 left-0 right-0 h-full flex justify-between items-center text-sm text-gray-600"
+  class="p-2 w-full md:text-sm absolute bottom-0 left-0 right-0 h-full flex justify-between items-center text-xs text-gray-600"
 >
   <p>
     Showing {{ pagination.totalItems }}
@@ -8,7 +8,7 @@
   </p>
 
   <div class="flex gap-2 items-center">
-    <p>Items per page</p>
+    <p>Per page</p>
 
     <select
       class="p-2 bg-white rounded-lg border border-gray-300"

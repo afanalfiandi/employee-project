@@ -1,12 +1,14 @@
 <div class="py-2 flex-col flex gap-2">
   @if (label) {
-  <label [for]="label" class="font-medium">{{ label }}</label>
+  <label [for]="label" class="font-medium md:text-base text-sm">{{
+    label
+  }}</label>
   } @if (type === 'text' || type === 'number' || type === 'password' || type ===
   'datetime-local') {
   <input
     *ngIf="control"
     [type]="type"
-    class="p-2 bg-white w-full block rounded-lg border border-gray-300 text-gray-800 focus:outline-0"
+    class="p-2 bg-white md:text-base text-sm w-full block rounded-lg border border-gray-300 text-gray-800 focus:outline-0"
     [placeholder]="placeholder"
     [formControl]="control"
     [max]="nowDatetimeLocal"
@@ -14,7 +16,7 @@
   } @else if (type === 'textarea') {
   <textarea
     *ngIf="control"
-    class="p-2 bg-white w-full block rounded-lg border border-gray-300 text-gray-800 focus:outline-0"
+    class="p-2 bg-white md:text-base text-sm w-full block rounded-lg border border-gray-300 text-gray-800 focus:outline-0"
     [formControl]="control"
   ></textarea>
   }

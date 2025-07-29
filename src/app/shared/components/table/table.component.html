@@ -16,12 +16,8 @@
           }
         </tr>
       </thead>
-    </table>
-  </div>
 
-  @if (data.length > 0) {
-  <div class="flex-1 overflow-y-auto" style="max-height: 400px">
-    <table class="w-full table-auto min-w-max">
+      @if (data.length > 0) {
       <tbody>
         @for (row of data; track $index) {
         <tr class="border-b border-gray-50">
@@ -53,11 +49,11 @@
         </tr>
         }
       </tbody>
+      } @else {
+      <p class="p-10 mx-auto">Oops there is no data to show...</p>
+      }
     </table>
   </div>
-  } @else {
-  <p class="p-10 mx-auto">Oops there is no data to show...</p>
-  }
 
   <div class="h-12 bg-white flex items-center justify-center z-50 relative">
     <app-pagination></app-pagination>

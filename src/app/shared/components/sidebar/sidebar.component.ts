@@ -6,6 +6,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SidebarService } from './sidebar.service';
 import { CommonModule } from '@angular/common';
 import { APP_ICONS } from '../../consts/icons.const';
+import { AuthService } from 'app/pages/auth/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,7 +17,12 @@ import { APP_ICONS } from '../../consts/icons.const';
 })
 export class SidebarComponent {
   private _sidebarService = inject(SidebarService);
+  private _authService = inject(AuthService);
 
   _showSidebar$ = this._sidebarService._show$;
   nav = SIDENAV;
+
+  onLogout() {
+    this._authService.logout();
+  }
 }

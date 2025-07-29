@@ -21,4 +21,4 @@ function generateDummyEmployees(count: number): Employee[] {
     }));
 }
 
-export const EMPLOYEE: Employee[] = generateDummyEmployees(100);
+export const EMPLOYEE: Employee[] = generateDummyEmployees(2);

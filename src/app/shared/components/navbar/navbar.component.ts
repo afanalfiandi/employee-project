@@ -14,7 +14,6 @@ export class NavbarComponent {
 
   showSidebar() {
     const isSidebarShowed = this._sidebarService._show$.value;
-    console.log(isSidebarShowed)
     this._sidebarService.toggle(!isSidebarShowed)
   }
 

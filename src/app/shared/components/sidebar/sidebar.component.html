@@ -1,5 +1,5 @@
 <aside
-  class="fixed top-0 left-0 z-50 h-screen w-[20rem] bg-white shadow-xl transition-transform duration-300 ease-in-out md:static md:translate-x-0"
+  class="fixed top-0 left-0 z-[9999] h-screen w-[20rem] bg-white shadow-xl transition-transform duration-300 ease-in-out md:static md:translate-x-0"
   [ngClass]="{
     'translate-x-0': _showSidebar$ | async,
     '-translate-x-full': !(_showSidebar$ | async),
@@ -22,5 +22,14 @@
       {{ n.label }}
     </a>
     }
+    <button
+      class="p-3 flex items-center hover:bg-gray-50 transition-all duration-300"
+      (click)="onLogout()"
+    >
+      <div class="grid mr-4 place-items-center">
+        <ng-icon [name]="'heroPower'" class="w-5 h-5"></ng-icon>
+      </div>
+      Logout
+    </button>
   </nav>
 </aside>
