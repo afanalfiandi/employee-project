@@ -15,6 +15,7 @@ export class TableComponent {
   @Input() data!: any[];
   @Input() columns!: string[];
   @Output() edit = new EventEmitter();
+  @Output() delete = new EventEmitter();
 
   getRowClass(col: string, row: any): string {
     if (col === 'status') {
@@ -34,5 +35,9 @@ export class TableComponent {
 
   onEdit(row: any) {
     this.edit.emit(row);
+  }
+
+  onDelete(row: any) {
+    this.delete.emit(row);
   }
 }

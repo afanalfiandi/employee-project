@@ -50,4 +50,10 @@ export class EmployeeService {
             })
         );
     }
+
+    delete(username: string) {
+        const current = this._employee$.value;
+        const filtered = current.filter(emp => emp.username !== username);
+        this._employee$.next(filtered);
+    }
 }

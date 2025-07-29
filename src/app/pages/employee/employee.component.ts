@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { LoadingService } from '../../shared/components/loading/loading.service';
 import { PaginationService } from '../../shared/components/pagination/pagination.service';
 import { Router } from '@angular/router';
+import { Confirmable } from 'app/shared/utils/confirmable.util';
 
 @Component({
   selector: 'app-employee',
@@ -94,6 +95,19 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
     this._router.navigate(['/employee/create']);
   }
 
+  onEdit(data: Employee) {
+    this._router.navigate(['/employee/update', data.username])
+  }
+
+  onDelete(data: Employee) {
+    const icon = "warning"
+    const msg = "Are you sure you want to delete this data?";
+    const title = "Delete Employee";
+    const confirmBtn = "Delete";
+
+    Confirmable(icon, msg, title, confirmBtn, () => this.deleteEmployee(data.username));
+  }
+
   paginationRefresh() {
     this._paginationService.refresh$.pipe(
       takeUntil(this._onDestroy$),
@@ -103,7 +117,7 @@ export class EmployeeComponent extends BaseComponent implements OnInit {
     ).subscribe();
   }
 
-  onEdit(data: Employee) {
-    this._router.navigate(['/employee/update', data.username])
+  deleteEmployee(username: string) {
+    this._employeeService.delete(username)
   }
 }
