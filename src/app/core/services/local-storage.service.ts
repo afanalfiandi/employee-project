@@ -47,6 +47,10 @@ export class LocalstorageService implements LocalStorageServiceInterface {
         return JSON.parse(this._result);
     }
 
+    value(): string {
+        return this._result;
+    }
+
     private encrypt(data: string): string {
         return Crypto.AES.encrypt(data, environment.LOCALKEY).toString();
     }

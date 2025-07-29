@@ -3,11 +3,13 @@ import { LocalstorageService } from "../../core/services/local-storage.service";
 import { AUTH } from "../../shared/dummy/auth.dummy";
 import { of } from "rxjs";
 import { LoadingService } from "../../shared/components/loading/loading.service";
+import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
+    private _router = inject(Router);
     private _localstorageService = inject(LocalstorageService);
     private _loadingService = inject(LoadingService);
 
@@ -27,6 +29,11 @@ export class AuthService {
     }
 
     isLoggedIn(): boolean {
-        return !!this._localstorageService.get("token")
+        return !!this._localstorageService.get("token").value()
+    }
+
+    logout() {
+        this._localstorageService.remove("token");
+        this._router.navigate(['/auth']);
     }
 }
